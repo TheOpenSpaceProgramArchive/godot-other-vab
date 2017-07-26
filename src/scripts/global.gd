@@ -1,6 +1,7 @@
 extends Node
 var currentScene = null
 var usedRocket = null
+var flight = false
 func _ready():
 	currentScene = get_tree().get_root().get_child(get_tree().get_root().get_child_count() -1)
 	pass
