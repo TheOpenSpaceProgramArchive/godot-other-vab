@@ -13,6 +13,9 @@ class part:
 		description = des
 		manufacturer = man
 		path = pa
+		var button = Button.new()
+		button.set_text(name)
+		get_node("gui/partSelect/"+type+"/"+type+"/"+type).add_child(button)
 func list_files_in_directory(path):
 	var files = []
 	var dir = Directory.new()
@@ -37,7 +40,6 @@ func loadParts():
 		pi.queue_free()
 func _ready():
 	loadParts()
-	print(classList[0].description)
 	set_fixed_process(true)
 func _fixed_process(delta):
 	if get_node("gui/toolbar/exitButton").is_pressed():
