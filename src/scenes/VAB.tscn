@@ -1,5 +1,257 @@
-[gd_scene format=1]
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://src/scripts/VAB.gd" type="Script" id=1]
+[ext_resource path="res://src/scenes/vabRocketBuild.tscn" type="PackedScene" id=2]
 
 [node name="VAB" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="ViewportSprite" type="ViewportSprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( 1.68066, -3.72217 )
+transform/scale = Vector2( 1024.55, 604.208 )
+
+[node name="vabRocketBuild" parent="ViewportSprite" instance=ExtResource( 2 )]
+
+[node name="gui" type="Node" parent="."]
+
+[node name="Control" type="Control" parent="gui"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 258.0
+margin/bottom = 287.0
+
+[node name="Control" type="Panel" parent="gui/Control"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1.0
+margin/top = 226.0
+margin/right = 11.0
+margin/bottom = -34.0
+
+[node name="partName" type="Label" parent="gui/Control/Control"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 5.0
+margin/top = 7.0
+margin/right = 230.0
+margin/bottom = 21.0
+text = "name"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="partManufacturer" type="Label" parent="gui/Control/Control"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 150.0
+margin/top = 15.0
+margin/right = 239.0
+margin/bottom = 29.0
+custom_colors/font_color = Color( 0.554688, 0.546021, 0.546021, 1 )
+text = "manufacturer"
+align = 2
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="partDescription" type="Label" parent="gui/Control/Control"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 34.0
+margin/right = 246.0
+margin/bottom = 94.0
+text = "Description"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="partSelect" type="TabContainer" parent="gui"]
+
+hint/tooltip = "Part Selector"
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 2.0
+margin/top = 2.0
+margin/right = 245.0
+margin/bottom = 59.0
+tab_align = 2
+tabs_visible = true
+
+[node name="control" type="Tabs" parent="gui/partSelect"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 4.0
+margin/top = 32.0
+margin/right = 4.0
+margin/bottom = 4.0
+
+[node name="ItemList1" type="ItemList" parent="gui/partSelect/control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -9.0
+margin/top = 25.0
+margin/right = 241.0
+margin/bottom = 193.0
+
+[node name="tanks" type="Tabs" parent="gui/partSelect"]
+
+visibility/visible = false
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 4.0
+margin/top = 32.0
+margin/right = 4.0
+margin/bottom = 4.0
+
+[node name="ItemList1" type="ItemList" parent="gui/partSelect/tanks"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -5.0
+margin/top = 26.0
+margin/right = 245.0
+margin/bottom = 194.0
+
+[node name="thrusters" type="Tabs" parent="gui/partSelect"]
+
+visibility/visible = false
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 4.0
+margin/top = 32.0
+margin/right = 4.0
+margin/bottom = 4.0
+
+[node name="ItemList1" type="ItemList" parent="gui/partSelect/thrusters"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -5.0
+margin/top = 26.0
+margin/right = 245.0
+margin/bottom = 194.0
+
+[node name="toolbar" type="Control" parent="gui"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 273.0
+margin/top = 4.0
+margin/right = -2.0
+margin/bottom = 556.0
+
+[node name="launchButton" type="Button" parent="gui/toolbar"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 260.0
+margin/top = -5.0
+margin/right = 357.0
+margin/bottom = 31.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Launch"
+flat = false
+
+[node name="saveButton" type="Button" parent="gui/toolbar"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 558.0
+margin/top = -2.0
+margin/right = 616.0
+margin/bottom = 30.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Save"
+flat = false
+
+[node name="loadButton" type="Button" parent="gui/toolbar"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 615.0
+margin/top = -3.0
+margin/right = 673.0
+margin/bottom = 29.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Load"
+flat = false
+
+[node name="exitButton" type="Button" parent="gui/toolbar"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 674.0
+margin/top = -3.0
+margin/right = 753.0
+margin/bottom = 29.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Leave VAB"
+flat = false
 
 

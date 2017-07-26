@@ -10,4 +10,4 @@ func _ready():
 	set_fixed_process(true)
 func _fixed_process(delta):
 	if is_pressed():
-	 global.setScene("res://src/scenes/launchpad.tscn")
+	 global.setScene("res://src/scenes/VAB.tscn")
