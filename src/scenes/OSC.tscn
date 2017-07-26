@@ -102,11 +102,6 @@ environment = SubResource( 1 )
 h_offset = 0.0
 v_offset = 0.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Camera"]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-environment = null
-
 [node name="osc_001" parent="." instance=ExtResource( 3 )]
 
 transform/local = Transform( 0.1, 0, 0, 0, 0.1, -4.35233e-05, 0, 4.35233e-05, 0.1, 0, 0.4, 0 )

@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://src/scripts/PannableCamera.gd" type="Script" id=1]
+
+[node name="PannableCamera" type="Camera"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 10, 101, 100 )
+projection = 0
+fov = 10.0
+near = 0.1
+far = 600.0
+keep_aspect = 1
+current = true
+visible_layers = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+script/script = ExtResource( 1 )
+rotation = 0
+angle = 45
+fovy_trombone = 10
+distance = 20
+target = Vector3( 0, 0, 0 )
+keyboard_control = 2
+
+
