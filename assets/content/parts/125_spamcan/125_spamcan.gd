@@ -1,6 +1,7 @@
 extends Spatial
 var name = "SpamCan"
 var manufacturer = "Stom Labs"
+var type = "control"
 var description = "The SpamCan by Stom Labs will suit you very well 10% of the time and for 10% of your missions"
 var rocketfuel_capacity = 100
 var oxidizer_capacity = 100
