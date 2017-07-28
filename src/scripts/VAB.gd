@@ -1,19 +1,5 @@
 extends Node
 var partPath = "res://assets/content/parts/"
-var classList = []
-#Create a part class
-class part:
-	var name
-	var type
-	var description
-	var manufacturer
-	var path
-	func _init(na, ty, des, man, pa):
-		name = na
-		type = ty
-		description = des
-		manufacturer = man
-		path = pa
 func list_files_in_directory(path):
 	var files = []
 	var dir = Directory.new()
@@ -34,14 +20,17 @@ func loadParts():
 	for i in partList:
 		var p = ResourceLoader.load(partPath + "/" + i +"/"+ i + ".scn")
 		var pi = p.instance()
-		classList.append(part.new(pi.name, pi.type, pi.description, pi.manufacturer, partPath + "/" + i +"/"+ i + ".scn"))
+		var partButton = ResourceLoader.load("res://src/scenes/partButton.tscn")
+		var pb = partButton.instance()
+		pb.create(pi.name, pi.type, pi.description, pi.manufacturer, partPath + "/" + pi.name +"/"+ pi.name + ".scn")
+		get_node("gui/partSelect/"+pi.type+"/"+pi.type+"/"+pi.type).add_child(pb)
+		#classList.append(part.new(pi.name, pi.type, pi.description, pi.manufacturer, partPath + "/" + i +"/"+ i + ".scn"))
 		pi.queue_free()
 func _ready():
 	loadParts()
-	for i in classList:
-		var button = Button.new()
-		button.set_text(i.name)
-		get_node("gui/partSelect/"+i.type+"/"+i.type+"/"+i.type).add_child(button)
+	#for i in classList:
+	#	var button = Button.new()
+	#	button.set_text(i.name)
 	set_fixed_process(true)
 func _fixed_process(delta):
 	if get_node("gui/toolbar/exitButton").is_pressed():
