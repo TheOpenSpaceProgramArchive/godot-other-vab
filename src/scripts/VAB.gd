@@ -26,8 +26,15 @@ func loadParts():
 		pb.create(pi.name, pi.type, pi.description, pi.manufacturer, partPath + "/" + pi.name +"/"+ pi.name + ".scn")
 		# Add the button as a child of the appropriate toolbar
 		get_node("gui/partSelect/"+pi.type+"/"+pi.type+"/"+pi.type).add_child(pb)
+		# Connect the signals
+		pb.connect("partButtonHovered", self, "onPartButtonHovered")
+		pb.connect("partButtonClicked", self, "onPartButtonClicked")
 		# Uninstance the part
 		pi.queue_free()
+func onPartButtonHovered(na, man, des):
+	get_node("gui/Control/Control/partName").set_text(na)
+	get_node("gui/Control/Control/partManufacturer").set_text(man)
+	get_node("gui/Control/Control/partDescription").set_text(des)
 func _ready():
 	loadParts()
 	set_fixed_process(true)
