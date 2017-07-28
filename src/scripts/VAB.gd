@@ -1,6 +1,7 @@
 extends Node
 var partPath = "res://assets/content/parts/"
 var classList = []
+#Create a part class
 class part:
 	var name
 	var type
