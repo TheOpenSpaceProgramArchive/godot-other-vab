@@ -12,6 +12,7 @@ class Part:
 	var description
 	var manufacturer
 	var path
+	# Set the variables
 	func _init(na, ty, des, man, pa):
 		name = na
 		type = ty
@@ -19,6 +20,7 @@ class Part:
 		manufacturer = man
 		path = pa
 func create(na, ty, des, man, pa):
+	#create the new part
 	part = Part.new(na, ty, des, man, pa)
 	set_text(part.name)
 func _ready():
