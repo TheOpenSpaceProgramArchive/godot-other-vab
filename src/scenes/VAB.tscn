@@ -17,7 +17,7 @@ transform/scale = Vector2( 1024.55, 604.208 )
 
 [node name="gui" type="Node" parent="."]
 
-[node name="Control" type="Control" parent="gui"]
+[node name="parts" type="Control" parent="gui"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -28,7 +28,7 @@ margin/top = 0.0
 margin/right = 258.0
 margin/bottom = 287.0
 
-[node name="Control" type="Panel" parent="gui/Control"]
+[node name="partInfo" type="Panel" parent="gui/parts"]
 
 anchor/right = 1
 anchor/bottom = 1
@@ -41,7 +41,7 @@ margin/top = 226.0
 margin/right = 11.0
 margin/bottom = -34.0
 
-[node name="partName" type="Label" parent="gui/Control/Control"]
+[node name="partName" type="Label" parent="gui/parts/partInfo"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -51,13 +51,12 @@ margin/left = 5.0
 margin/top = 7.0
 margin/right = 230.0
 margin/bottom = 21.0
-text = "name"
 clip_text = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="partManufacturer" type="Label" parent="gui/Control/Control"]
+[node name="partManufacturer" type="Label" parent="gui/parts/partInfo"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -68,7 +67,6 @@ margin/top = 15.0
 margin/right = 239.0
 margin/bottom = 29.0
 custom_colors/font_color = Color( 0.554688, 0.546021, 0.546021, 1 )
-text = "manufacturer"
 align = 2
 valign = 1
 clip_text = true
@@ -76,7 +74,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="partDescription" type="Label" parent="gui/Control/Control"]
+[node name="partDescription" type="Label" parent="gui/parts/partInfo"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -86,7 +84,6 @@ margin/left = 0.0
 margin/top = 34.0
 margin/right = 246.0
 margin/bottom = 94.0
-text = "Description"
 autowrap = true
 percent_visible = 1.0
 lines_skipped = 0

@@ -32,9 +32,9 @@ func loadParts():
 		# Uninstance the part
 		pi.queue_free()
 func onPartButtonHovered(na, man, des):
-	get_node("gui/Control/Control/partName").set_text(na)
-	get_node("gui/Control/Control/partManufacturer").set_text(man)
-	get_node("gui/Control/Control/partDescription").set_text(des)
+	get_node("gui/parts/partInfo/partName").set_text(na)
+	get_node("gui/parts/partInfo/partManufacturer").set_text(man)
+	get_node("gui/parts/partInfo/partDescription").set_text(des)
 func _ready():
 	loadParts()
 	set_fixed_process(true)
