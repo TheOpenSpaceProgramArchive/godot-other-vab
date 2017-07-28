@@ -155,6 +155,31 @@ margin/top = 32.0
 margin/right = 4.0
 margin/bottom = 4.0
 
+[node name="tanks" type="ScrollContainer" parent="gui/partSelect/tanks"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -5.0
+margin/top = 22.0
+margin/right = 239.0
+margin/bottom = 193.0
+scroll/horizontal = true
+scroll/vertical = true
+
+[node name="tanks" type="HBoxContainer" parent="gui/partSelect/tanks/tanks"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+alignment = 0
+
 [node name="thrusters" type="Tabs" parent="gui/partSelect"]
 
 visibility/visible = false
@@ -168,6 +193,31 @@ margin/left = 4.0
 margin/top = 32.0
 margin/right = 4.0
 margin/bottom = 4.0
+
+[node name="thrusters" type="ScrollContainer" parent="gui/partSelect/thrusters"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -5.0
+margin/top = 22.0
+margin/right = 239.0
+margin/bottom = 193.0
+scroll/horizontal = true
+scroll/vertical = true
+
+[node name="thrusters" type="HBoxContainer" parent="gui/partSelect/thrusters/thrusters"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+alignment = 0
 
 [node name="toolbar" type="Control" parent="gui"]
 
