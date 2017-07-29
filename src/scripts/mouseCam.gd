@@ -1,5 +1,5 @@
 #extends Spatial
-
+onready var cam = get_node("innergimbal/zoom/cam")
 var pressed = false
 var last_position = Vector2()
 
@@ -9,8 +9,13 @@ func _ready():
 
 func _unhandled_input(event):
     if event.type == InputEvent.MOUSE_BUTTON:
-        pressed = event.is_pressed()
-        if pressed:
+         if event.button_index == BUTTON_WHEEL_UP:
+          cam.set_translation(cam.get_translation() + Vector3(0,0,-1))
+         elif event.button_index == BUTTON_WHEEL_DOWN:
+          cam.set_translation(cam.get_translation() + Vector3(0,0,1))
+         else:
+          pressed = event.is_pressed()
+          if pressed:
             last_position = event.pos
     elif event.type == InputEvent.MOUSE_MOTION and pressed:
         var delta = event.pos - last_position

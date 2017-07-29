@@ -11,7 +11,11 @@ script/script = ExtResource( 1 )
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="cam" type="Camera" parent="innergimbal"]
+[node name="zoom" type="Spatial" parent="innergimbal"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="cam" type="Camera" parent="innergimbal/zoom"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.2132 )
