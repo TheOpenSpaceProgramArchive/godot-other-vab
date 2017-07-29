@@ -2,6 +2,7 @@ extends Node
 var rocket = null
 var partPath = "res://assets/content/parts/"
 onready var plane = get_node("ViewportSprite/vabRocketBuild/gimbal/innergimbal/zoom/plane")
+onready var camera = get_node("ViewportSprite/vabRocketBuild/gimbal/innergimbal/zoom/cam")
 # A counter to manage reseting the partInfo area
 var counter = 1
 var building = false
@@ -39,7 +40,16 @@ func loadParts():
 		pi.queue_free()
 func vabControl():
 	if building == true:
-		plane.get_child(0).set_translation(Vector3(get_viewport().get_mouse_pos().x, get_viewport().get_mouse_pos().y, plane.get_child(0).get_translation().z))
+		var ray_length = 1000
+		var from = camera.project_ray_origin(get_viewport().get_mouse_pos())
+		var to = from + camera.project_ray_normal(get_viewport().get_mouse_pos()) * ray_length
+		var directState = PhysicsServer.space_get_direct_state(plane.get_world().get_space())
+		var result = directState.intersect_ray(from,to, Array(), 2147483647, 16)
+		if result.has("position"):
+			var newTransform = Transform(plane.get_child(0).get_global_transform().basis, result.position)
+			plane.get_child(0).set_global_transform(newTransform)
+			print(result.position)
+		print(result.keys())
 		if plane.get_child_count() > 1:
 			plane.get_child(0).queue_free()
 func onPartButtonHovered(na, man, des):
