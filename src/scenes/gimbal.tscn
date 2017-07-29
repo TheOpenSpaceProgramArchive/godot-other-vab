@@ -33,6 +33,7 @@ v_offset = 0.0
 [node name="plane" type="Area" parent="innergimbal/zoom"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1200, 0, 0, 0, 600, 0, 0, 0, 1, 0, 0, 0 )
 input/ray_pickable = false
 input/capture_on_drag = false
 shape_count = 0

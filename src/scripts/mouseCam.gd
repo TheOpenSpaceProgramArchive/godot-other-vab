@@ -6,7 +6,7 @@ var last_position = Vector2()
 onready var plane = get_node("innergimbal/zoom/plane")
 func _ready():
     print(get_viewport().get_visible_rect())
-#    plane.set_scale(Vector3(get_viewport().get_visible_rect().size.width,get_viewport().get_visible_rect().size.height,0))
+    plane.set_transform(Transform(Vector3(get_viewport().get_visible_rect().size.width,0,0),Vector3(0,get_viewport().get_visible_rect().size.height,0),Vector3(0,0,1),Vector3(0,0,0)))
     set_process_unhandled_input(true)
     print(get_viewport().get_visible_rect())
 func _unhandled_input(event):

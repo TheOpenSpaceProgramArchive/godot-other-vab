@@ -39,7 +39,7 @@ func loadParts():
 		pi.queue_free()
 func vabControl():
 	if building == true:
-		#plane.get_child(0).set_translation(Vector3(get_viewport().get_mouse_pos().x, get_viewport().get_mouse_pos().y, plane.get_child(0).get_translation().z))
+		plane.get_child(0).set_translation(Vector3(get_viewport().get_mouse_pos().x, get_viewport().get_mouse_pos().y, plane.get_child(0).get_translation().z))
 		if plane.get_child_count() > 1:
 			plane.get_child(0).queue_free()
 func onPartButtonHovered(na, man, des):
@@ -61,9 +61,9 @@ func onPartButtonClicked(na, man, des, pa):
 	elif building == false:
 		var p = ResourceLoader.load(pa)
 		var pi = p.instance()
-		var scale = pi.get_scale()
+		var transform = pi.get_global_transform()
 		plane.add_child(pi)
-		pi.set_scale(scale)
+		pi.set_global_transform(transform)
 		building = true
 func _ready():
 	if rocket == null:
