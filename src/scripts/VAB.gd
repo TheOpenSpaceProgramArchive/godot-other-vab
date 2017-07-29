@@ -42,6 +42,7 @@ func _ready():
 	loadParts()
 	set_fixed_process(true)
 func _fixed_process(delta):
+	#If there is no signal from a button then clear the Partinfo area
 	counter += 1
 	if counter > 5:
 		get_node("gui/parts/partInfo/partName").set_text("")

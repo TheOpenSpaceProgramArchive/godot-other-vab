@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://src/scenes/PannableCamera.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/scripts/test.gd" type="Script" id=2]
 
 [sub_resource type="Environment" id=1]
 
@@ -134,5 +135,6 @@ geometry/depth_scale = false
 geometry/visible_in_all_rooms = false
 geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
+script/script = ExtResource( 2 )
 
 
