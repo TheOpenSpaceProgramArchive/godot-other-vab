@@ -180,7 +180,7 @@ margin/right = 0.0
 margin/bottom = 0.0
 alignment = 0
 
-[node name="thrusters" type="Tabs" parent="gui/partSelect"]
+[node name="engines" type="Tabs" parent="gui/partSelect"]
 
 visibility/visible = false
 anchor/right = 1
@@ -194,7 +194,7 @@ margin/top = 32.0
 margin/right = 4.0
 margin/bottom = 4.0
 
-[node name="thrusters" type="ScrollContainer" parent="gui/partSelect/thrusters"]
+[node name="engines" type="ScrollContainer" parent="gui/partSelect/engines"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -207,7 +207,7 @@ margin/bottom = 193.0
 scroll/horizontal = true
 scroll/vertical = true
 
-[node name="thrusters" type="HBoxContainer" parent="gui/partSelect/thrusters/thrusters"]
+[node name="engines" type="HBoxContainer" parent="gui/partSelect/engines/engines"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false

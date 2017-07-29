@@ -1,7 +1,10 @@
 extends Node
+var rocket = null
 var partPath = "res://assets/content/parts/"
+onready var plane = get_node("ViewportSprite/vabRocketBuild/gimbal/innergimbal/zoom/plane")
 # A counter to manage reseting the partInfo area
 var counter = 1
+var building = false
 func list_files_in_directory(path):
 	var files = []
 	var dir = Directory.new()
@@ -19,13 +22,14 @@ func loadParts():
 	var partList = list_files_in_directory(partPath)
 	for i in partList:
 		# Create an instance of a part
+		var partpart = partPath + "/" + i +"/"+ i + ".scn" 
 		var p = ResourceLoader.load(partPath + "/" + i +"/"+ i + ".scn")
 		var pi = p.instance()
 		# Create an instance of a partButton
 		var partButton = ResourceLoader.load("res://src/scenes/partButton.tscn")
 		var pb = partButton.instance()
 		# Populate it with info about its part
-		pb.create(pi.name, pi.type, pi.description, pi.manufacturer, partPath + "/" + pi.name +"/"+ pi.name + ".scn")
+		pb.create(pi.name, pi.type, pi.description, pi.manufacturer, partpart)
 		# Add the button as a child of the appropriate toolbar
 		get_node("gui/partSelect/"+pi.type+"/"+pi.type+"/"+pi.type).add_child(pb)
 		# Connect the signals
@@ -33,15 +37,41 @@ func loadParts():
 		pb.connect("partButtonClicked", self, "onPartButtonClicked")
 		# Uninstance the part
 		pi.queue_free()
+func vabControl():
+	if building == true:
+		#plane.get_child(0).set_translation(Vector3(get_viewport().get_mouse_pos().x, get_viewport().get_mouse_pos().y, plane.get_child(0).get_translation().z))
+		if plane.get_child_count() > 1:
+			plane.get_child(0).queue_free()
 func onPartButtonHovered(na, man, des):
 	counter = 1
 	get_node("gui/parts/partInfo/partName").set_text(na)
 	get_node("gui/parts/partInfo/partManufacturer").set_text(man)
 	get_node("gui/parts/partInfo/partDescription").set_text(des)
+func onPartButtonClicked(na, man, des, pa):
+	counter = 1
+	get_node("gui/parts/partInfo/partName").set_text(na)
+	get_node("gui/parts/partInfo/partManufacturer").set_text(man)
+	get_node("gui/parts/partInfo/partDescription").set_text(des)
+	rocket.set_mass(0)
+	if rocket.get_child_count() < 1:
+		var p = ResourceLoader.load(pa)
+		var pi = p.instance()
+		rocket.add_child(pi)
+		pi.set_translation(Vector3(0,0,0))
+	elif building == false:
+		var p = ResourceLoader.load(pa)
+		var pi = p.instance()
+		var scale = pi.get_scale()
+		plane.add_child(pi)
+		pi.set_scale(scale)
+		building = true
 func _ready():
+	if rocket == null:
+		rocket = get_node("ViewportSprite/vabRocketBuild/rocket")
 	loadParts()
 	set_fixed_process(true)
 func _fixed_process(delta):
+	vabControl()
 	#If there is no signal from a button then clear the Partinfo area
 	counter += 1
 	if counter > 5:

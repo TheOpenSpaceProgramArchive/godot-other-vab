@@ -1,0 +1,3 @@
+7/28 23:28:57.149  Auto-picking gateway based on GMT
+7/28 23:28:57.149      Find gateway closest to 08.00
+7/28 23:28:57.149      Gateway 1 (uswest.battle.net at GMT 08) is closest to 08.00
