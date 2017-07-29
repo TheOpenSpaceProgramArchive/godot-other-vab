@@ -1,5 +1,7 @@
 extends Node
 var partPath = "res://assets/content/parts/"
+# A counter to manage reseting the partInfo area
+var counter = 1
 func list_files_in_directory(path):
 	var files = []
 	var dir = Directory.new()
@@ -32,6 +34,7 @@ func loadParts():
 		# Uninstance the part
 		pi.queue_free()
 func onPartButtonHovered(na, man, des):
+	counter = 1
 	get_node("gui/parts/partInfo/partName").set_text(na)
 	get_node("gui/parts/partInfo/partManufacturer").set_text(man)
 	get_node("gui/parts/partInfo/partDescription").set_text(des)
@@ -39,6 +42,11 @@ func _ready():
 	loadParts()
 	set_fixed_process(true)
 func _fixed_process(delta):
+	counter += 1
+	if counter > 5:
+		get_node("gui/parts/partInfo/partName").set_text("")
+		get_node("gui/parts/partInfo/partManufacturer").set_text("")
+		get_node("gui/parts/partInfo/partDescription").set_text("")
 	#exit button function
 	if get_node("gui/toolbar/exitButton").is_pressed():
 		global.setScene("res://src/scenes/oscMenu.tscn")
