@@ -66,12 +66,14 @@ func onPartButtonClicked(na, man, des, pa):
 	if rocket.get_child_count() < 1:
 		var p = ResourceLoader.load(pa)
 		var pi = p.instance()
+		pi.set_mode(3)
 		rocket.add_child(pi)
 		pi.set_translation(Vector3(0,0,0))
 	elif building == false:
 		var p = ResourceLoader.load(pa)
 		var pi = p.instance()
-		var transform = pi.get_global_transform()
+		pi.set_mode(3)
+		var transform = pi.get_global_transform().translated(Vector3(100,100,100))
 		plane.add_child(pi)
 		pi.set_global_transform(transform)
 		building = true
