@@ -1,4 +1,4 @@
-extends Spatial
+extends RigidBody
 var name = "SpamCan"
 var manufacturer = "Stom Labs"
 var type = "control"

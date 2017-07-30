@@ -1,4 +1,4 @@
-extends Spatial
+extends RigidBody
 var name = "Juggernaut V1"
 var manufacturer = "Stom Labs"
 var type = "tanks"

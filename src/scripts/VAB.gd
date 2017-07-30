@@ -48,10 +48,10 @@ func vabControl():
 		if result.has("position"):
 			var newTransform = Transform(plane.get_child(0).get_global_transform().basis, result.position)
 			plane.get_child(0).set_global_transform(newTransform)
-			print(result.position)
-		print(result.keys())
 		if plane.get_child_count() > 1:
 			plane.get_child(0).queue_free()
+		if Input.is_mouse_button_pressed(1):
+			building = false
 func onPartButtonHovered(na, man, des):
 	counter = 1
 	get_node("gui/parts/partInfo/partName").set_text(na)

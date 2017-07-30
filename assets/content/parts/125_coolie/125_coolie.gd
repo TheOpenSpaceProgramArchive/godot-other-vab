@@ -1,4 +1,4 @@
-extends Spatial
+extends RigidBody
 var name = "Coolie"
 var manufacturer = "Stom Labs"
 var type = "engines"
