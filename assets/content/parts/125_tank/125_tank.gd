@@ -10,3 +10,4 @@ var option_slider_any = 100
 func _ready():
 	if global.flight == true:
 		pass
+

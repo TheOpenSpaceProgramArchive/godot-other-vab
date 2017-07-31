@@ -1,11 +1,15 @@
 extends Node
 var rocket = null
+var left
 var partPath = "res://assets/content/parts/"
 onready var plane = get_node("ViewportSprite/vabRocketBuild/gimbal/innergimbal/zoom/plane")
 onready var camera = get_node("ViewportSprite/vabRocketBuild/gimbal/innergimbal/zoom/cam")
 # A counter to manage reseting the partInfo area
 var counter = 1
+var counter2 = 1
 var building = false
+var attached = false
+var mouseEntered = false
 func list_files_in_directory(path):
 	var files = []
 	var dir = Directory.new()
@@ -39,7 +43,12 @@ func loadParts():
 		# Uninstance the part
 		pi.queue_free()
 func vabControl():
-	if building == true:
+	if Input.is_mouse_button_pressed(1):
+		if building == true:
+			building = false
+		elif building == false and mouseEntered:
+			building = true
+	if building == true and not attached:
 		var ray_length = 1000
 		var from = camera.project_ray_origin(get_viewport().get_mouse_pos())
 		var to = from + camera.project_ray_normal(get_viewport().get_mouse_pos()) * ray_length
@@ -50,8 +59,6 @@ func vabControl():
 			plane.get_child(0).set_global_transform(newTransform)
 		if plane.get_child_count() > 1:
 			plane.get_child(0).queue_free()
-		if Input.is_mouse_button_pressed(1):
-			building = false
 func onPartButtonHovered(na, man, des):
 	counter = 1
 	get_node("gui/parts/partInfo/partName").set_text(na)
@@ -73,10 +80,16 @@ func onPartButtonClicked(na, man, des, pa):
 		var p = ResourceLoader.load(pa)
 		var pi = p.instance()
 		pi.set_mode(3)
+		pi.connect("mouse_enter", self, "partMouseEnter")
+		pi.connect("mouse_exit", self, "partMouseExit")
 		var transform = pi.get_global_transform().translated(Vector3(100,100,100))
 		plane.add_child(pi)
 		pi.set_global_transform(transform)
 		building = true
+func partMouseEnter():
+	mouseEntered = true
+func partMouseExit():
+	mouseEntered = false
 func _ready():
 	if rocket == null:
 		rocket = get_node("ViewportSprite/vabRocketBuild/rocket")
@@ -85,6 +98,7 @@ func _ready():
 func _fixed_process(delta):
 	vabControl()
 	#If there is no signal from a button then clear the Partinfo area
+	counter2 += 1
 	counter += 1
 	if counter > 5:
 		get_node("gui/parts/partInfo/partName").set_text("")
@@ -93,3 +107,4 @@ func _fixed_process(delta):
 	#exit button function
 	if get_node("gui/toolbar/exitButton").is_pressed():
 		global.setScene("res://src/scenes/oscMenu.tscn")
+
