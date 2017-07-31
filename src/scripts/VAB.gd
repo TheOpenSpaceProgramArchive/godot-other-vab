@@ -1,12 +1,14 @@
 extends Node
 var rocket = null
-var left
+var connectArray = Array()
+var buildingConnectArray = Array()
 var partPath = "res://assets/content/parts/"
+var currentBuild = null
 onready var plane = get_node("ViewportSprite/vabRocketBuild/gimbal/innergimbal/zoom/plane")
 onready var camera = get_node("ViewportSprite/vabRocketBuild/gimbal/innergimbal/zoom/cam")
 # A counter to manage reseting the partInfo area
 var counter = 1
-var counter2 = 1
+#Helper variables
 var building = false
 var attached = false
 var mouseEntered = false
@@ -42,13 +44,29 @@ func loadParts():
 		pb.connect("partButtonClicked", self, "onPartButtonClicked")
 		# Uninstance the part
 		pi.queue_free()
+func attachParts():
+	
+	
+	pass
 func vabControl():
+	if building:
+		for i1 in buildingConnectArray:
+			if (!i1.get_ref()):
+				pass
+			else:
+				i1 = i1.get_ref()
+				for i2 in i1. get_overlapping_areas ( ):
+					if i1.get_global_transform().origin.distance_to(i2.get_global_transform().origin) < 2 and mouseEntered:
+						attached = true
+						
+					else:
+						attached = false
 	if Input.is_mouse_button_pressed(1):
 		if building == true:
 			building = false
 		elif building == false and mouseEntered:
 			building = true
-	if building == true and not attached:
+	if building == true and attached == false:
 		var ray_length = 1000
 		var from = camera.project_ray_origin(get_viewport().get_mouse_pos())
 		var to = from + camera.project_ray_normal(get_viewport().get_mouse_pos()) * ray_length
@@ -70,13 +88,7 @@ func onPartButtonClicked(na, man, des, pa):
 	get_node("gui/parts/partInfo/partManufacturer").set_text(man)
 	get_node("gui/parts/partInfo/partDescription").set_text(des)
 	rocket.set_mass(0)
-	if rocket.get_child_count() < 1:
-		var p = ResourceLoader.load(pa)
-		var pi = p.instance()
-		pi.set_mode(3)
-		rocket.add_child(pi)
-		pi.set_translation(Vector3(0,0,0))
-	elif building == false:
+	if building == false and rocket.get_child_count() >= 1:
 		var p = ResourceLoader.load(pa)
 		var pi = p.instance()
 		pi.set_mode(3)
@@ -85,7 +97,16 @@ func onPartButtonClicked(na, man, des, pa):
 		var transform = pi.get_global_transform().translated(Vector3(100,100,100))
 		plane.add_child(pi)
 		pi.set_global_transform(transform)
+		for i in pi.get_children():
+			if i.get_name().find("connect") != -1:
+				buildingConnectArray.append(weakref(i))
 		building = true
+	elif rocket.get_child_count() < 1:
+		var p = ResourceLoader.load(pa)
+		var pi = p.instance()
+		pi.set_mode(3)
+		rocket.add_child(pi)
+		pi.set_translation(Vector3(0,0,0))
 func partMouseEnter():
 	mouseEntered = true
 func partMouseExit():
@@ -98,7 +119,6 @@ func _ready():
 func _fixed_process(delta):
 	vabControl()
 	#If there is no signal from a button then clear the Partinfo area
-	counter2 += 1
 	counter += 1
 	if counter > 5:
 		get_node("gui/parts/partInfo/partName").set_text("")
