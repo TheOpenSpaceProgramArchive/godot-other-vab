@@ -1,10 +1,10 @@
 extends Node
-var currentScene = null
-var usedRocket = null
+onready var currentScene = get_tree().get_root().get_child(get_tree().get_root().get_child_count() -1)
+var usedRocket
 var flight = false
-func _ready():
-	currentScene = get_tree().get_root().get_child(get_tree().get_root().get_child_count() -1)
-	pass
+onready var classes = Classes.new()
+var atmosphericPressure = 0
+
 func setScene(scene):
    #clean up the current scene
    currentScene.queue_free()
@@ -14,3 +14,8 @@ func setScene(scene):
    currentScene = s.instance()
    # add scene to root
    get_tree().get_root().add_child(currentScene)
+
+class Classes:
+    extends Reference
+    
+    const Part = preload("res://src/scripts/part.gd")
