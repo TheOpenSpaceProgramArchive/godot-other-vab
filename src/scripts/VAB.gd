@@ -45,8 +45,6 @@ func loadParts():
 		# Uninstance the part
 		pi.queue_free()
 func attachParts():
-	
-	
 	pass
 func vabControl():
 	if building:
@@ -58,15 +56,15 @@ func vabControl():
 				for i2 in i1. get_overlapping_areas ( ):
 					if i2.get_name().find("connect") != -1:
 							attached = true
-						
-						else:
+							i1.set_global_transform(i2.get_global_transform())
+					else:
 							attached = false
 	if Input.is_mouse_button_pressed(1):
 		if building == true:
 			building = false
 		elif building == false and mouseEntered:
 			building = true
-	if building == true and attached == false:
+	if building == true:
 		var ray_length = 1000
 		var from = camera.project_ray_origin(get_viewport().get_mouse_pos())
 		var to = from + camera.project_ray_normal(get_viewport().get_mouse_pos()) * ray_length
