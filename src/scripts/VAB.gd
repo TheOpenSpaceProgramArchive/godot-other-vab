@@ -56,11 +56,11 @@ func vabControl():
 			else:
 				i1 = i1.get_ref()
 				for i2 in i1. get_overlapping_areas ( ):
-					if i1.get_global_transform().origin.distance_to(i2.get_global_transform().origin) < 2 and mouseEntered:
-						attached = true
+					if i2.get_name().find("connect") != -1:
+							attached = true
 						
-					else:
-						attached = false
+						else:
+							attached = false
 	if Input.is_mouse_button_pressed(1):
 		if building == true:
 			building = false
