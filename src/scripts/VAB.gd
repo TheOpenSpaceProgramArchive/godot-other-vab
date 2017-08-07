@@ -10,7 +10,7 @@ onready var camera = get_node("ViewportSprite/vabRocketBuild/gimbal/innergimbal/
 var counter = 1
 #Helper variables
 var building = false
-var attached = false
+var attached
 var mouseEntered = false
 func list_files_in_directory(path):
 	var files = []
@@ -44,10 +44,6 @@ func loadParts():
 		pb.connect("partButtonClicked", self, "onPartButtonClicked")
 		# Uninstance the part
 		pi.queue_free()
-func attachParts(from, to):
-	if attached == true:
-		print("Attached Part")
-		from.set_global_transform(to.get_global_transform())
 func vabControl():
 	if building:
 		for i1 in buildingConnectArray:
@@ -62,7 +58,9 @@ func vabControl():
 						else:
 							if i2.get_name().find("connect") != -1 and i3.get_ref() != i2:
 								attached = true
-								attachParts(i3.get_ref().get_parent(), i2)
+								print(attached)
+								i3.get_ref().get_parent().set_global_transform(i3.get_ref().get_parent().get_global_transform().translated(i2.get_global_transform().origin))
+								i2.get_node("PinJoint").set_node_b(i1.get_path())
 							else:
 								attached = false
 	if Input.is_mouse_button_pressed(1):
