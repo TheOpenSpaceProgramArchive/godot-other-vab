@@ -44,8 +44,10 @@ func loadParts():
 		pb.connect("partButtonClicked", self, "onPartButtonClicked")
 		# Uninstance the part
 		pi.queue_free()
-func attachParts():
-	pass
+func attachParts(from, to):
+	if attached == true:
+		print("Attached Part")
+		from.set_global_transform(to.get_global_transform())
 func vabControl():
 	if building:
 		for i1 in buildingConnectArray:
@@ -53,12 +55,16 @@ func vabControl():
 				pass
 			else:
 				i1 = i1.get_ref()
-				for i2 in i1. get_overlapping_areas ( ):
-					if i2.get_name().find("connect") != -1:
-							attached = true
-							i1.set_global_transform(i2.get_global_transform())
-					else:
-							attached = false
+				for i2 in i1.get_overlapping_areas ( ):
+					for i3 in buildingConnectArray:
+						if (!i3.get_ref()):
+							pass
+						else:
+							if i2.get_name().find("connect") != -1 and i3.get_ref() != i2:
+								attached = true
+								attachParts(i3.get_ref().get_parent(), i2)
+							else:
+								attached = false
 	if Input.is_mouse_button_pressed(1):
 		if building == true:
 			building = false
@@ -95,6 +101,7 @@ func onPartButtonClicked(na, man, des, pa):
 		var transform = pi.get_global_transform().translated(Vector3(100,100,100))
 		plane.add_child(pi)
 		pi.set_global_transform(transform)
+		buildingConnectArray.clear()
 		for i in pi.get_children():
 			if i.get_name().find("connect") != -1:
 				buildingConnectArray.append(weakref(i))
